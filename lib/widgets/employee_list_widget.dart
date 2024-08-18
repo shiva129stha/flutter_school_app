@@ -1,7 +1,5 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:flutter/material.dart';
-import 'package:flutter_school_app/screen/teacher_details_screen.dart';
+import 'package:flutter_school_app/screen/techerphone/teacher_details_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class EmployeeListWidget extends StatelessWidget {
@@ -28,51 +26,76 @@ class EmployeeListWidget extends StatelessWidget {
                     )));
       },
       child: Container(
-        height: 80,
+        height: 100,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: Colors.grey.shade300),
-        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-        padding: const EdgeInsets.all(10),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(15),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.2),
+              spreadRadius: 2,
+              blurRadius: 5,
+              offset: Offset(0, 3),
+            ),
+          ],
+        ),
+        margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        padding: const EdgeInsets.all(12),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             CircleAvatar(
-              radius: 24,
-              backgroundColor: Colors.green,
+              radius: 30,
+              backgroundColor: Colors.grey.shade300,
               child: Text(
-                name!.substring(0, 1).toUpperCase(),
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                name!.isNotEmpty ? name![0].toUpperCase() : '?',
+                style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
               ),
             ),
-            const SizedBox(
-              width: 15,
-            ),
+            const SizedBox(width: 16),
             Expanded(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    name!,
-                    style: const TextStyle(fontSize: 18, color: Colors.black),
+                    name ?? 'Name not available',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87,
+                    ),
                   ),
                   Text(
-                    designation!,
-                    style: const TextStyle(fontSize: 18, color: Colors.grey),
+                    designation ?? 'Designation not available',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.grey.shade600,
+                    ),
                   ),
                 ],
               ),
             ),
             IconButton(
-                onPressed: () async {
-                  await launch("tel:$phoneNo");
-                },
-                icon: const Icon(
-                  Icons.phone,
-                  color: Colors.green,
-                )),
+              onPressed: phoneNo != null && phoneNo!.isNotEmpty
+                  ? () async {
+                      final uri = Uri.parse("tel:$phoneNo");
+                      if (await canLaunchUrl(uri)) {
+                        await launchUrl(uri);
+                      } else {
+                        // Handle error
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Cannot make a call to $phoneNo'),
+                            backgroundColor: Colors.red,
+                          ),
+                        );
+                      }
+                    }
+                  : null,
+              icon: const Icon(Icons.phone, color: Colors.green),
+              tooltip: 'Call',
+            ),
           ],
         ),
       ),
