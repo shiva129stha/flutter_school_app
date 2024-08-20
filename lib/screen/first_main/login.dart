@@ -2,14 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_school_app/screen/first_main/home.dart';
-import 'package:flutter_school_app/screen/first_main/verification_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-// Import your HomePage widget
+import 'home.dart'; // Import your HomePage widget
 import 'forgot.dart'; // Import your Forgot Password widget
 import 'package:google_fonts/google_fonts.dart';
 
-// Import Google Fonts package
+import 'verification_screen.dart'; // Import Google Fonts package
 
 class LoginPageScreen extends StatefulWidget {
   const LoginPageScreen({super.key});

@@ -11,74 +11,124 @@ class TeacherPhoneScreen extends StatefulWidget {
   State<TeacherPhoneScreen> createState() => _TeacherPhoneScreenState();
 }
 
-class _TeacherPhoneScreenState extends State<TeacherPhoneScreen> {
+class _TeacherPhoneScreenState extends State<TeacherPhoneScreen> with SingleTickerProviderStateMixin {
   TextEditingController? _searchController;
   String query = '';
-  late List<Employee> employee;
-  final _searchFocusNode = FocusNode();
-
   late List<Employee> employeeData;
+  final _searchFocusNode = FocusNode();
+  final ScrollController _scrollController = ScrollController(); // Add ScrollController
+
+  late AnimationController _animationController;
+  late Animation<double> _searchAnimation;
 
   @override
   void initState() {
-    employeeData = FetchDataApi.employeeList;
-    _searchController = TextEditingController(text: '');
     super.initState();
+    _searchController = TextEditingController(text: '');
+    employeeData = FetchDataApi.employeeList;
+
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 300),
+    );
+    _searchAnimation = CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.easeInOut,
+    );
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    _searchController?.dispose();
+    _searchFocusNode.dispose();
+    _scrollController.dispose(); // Dispose of ScrollController
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Stack(
-          children: [
-            employeeDashboardBody(),
-            Positioned(
-              top: 0,
-              left: 0,
-              right: 0,
-              child: employeeBar(context),
-            ),
-            Positioned(
-              top: 80,
-              left: 16,
-              right: 16,
-              child: searchWidget(context),
-            ),
-          ],
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.deepPurple,
+        title: AnimatedBuilder(
+          animation: _searchAnimation,
+          builder: (context, child) {
+            return SizedBox(
+              height: kToolbarHeight,
+              child: _searchAnimation.value > 0
+                  ? SizeTransition(
+                      sizeFactor: _searchAnimation,
+                      axis: Axis.horizontal,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: SearchWidget(
+                          onChange: searchItems,
+                          text: query,
+                          isFocus: true,
+                          controller: _searchController,
+                          focusNode: _searchFocusNode,
+                        ),
+                      ),
+                    )
+                  : const Padding(
+                    padding: EdgeInsets.only(top: 15.0),
+                    child: Text(
+                        'Teacher Details',
+                        style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                  ),
+            );
+          },
         ),
-      ),
-    );
-  }
-
-  Widget employeeBar(BuildContext context) {
-    return Container(
-      height: 60,
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      decoration: const BoxDecoration(
-        color: Colors.blueAccent,
-        borderRadius: BorderRadius.vertical(
-          bottom: Radius.circular(16),
-        ),
-      ),
-      child: Row(
-        children: [
-          const Icon(Icons.person, color: Colors.white, size: 28),
-          const SizedBox(width: 10),
-          Text(
-            "Teacher Details",
-            style: TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.search),
+            onPressed: () {
+              _animationController.isDismissed
+                  ? _animationController.forward()
+                  : _animationController.reverse();
+            },
           ),
         ],
       ),
+      body: Container( margin: const EdgeInsets.all(8.0),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              color: Colors.white, // Background color of the list container
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.2),
+                  spreadRadius: 2,
+                  blurRadius: 5,
+                  offset: const Offset(0, 3), // Shadow position
+                ),
+              ],
+            ),
+        child: SafeArea(
+          child: SingleChildScrollView(
+            child: Container(
+              child: Column(
+                
+                children: [
+                  const SizedBox(
+                    height: 10.0, // Adjust height as needed
+                  ),
+                  _employeeDashboardBody(),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 
-  FutureBuilder<List<Employee>> employeeDashboardBody() {
+  FutureBuilder<List<Employee>> _employeeDashboardBody() {
     return FutureBuilder(
       future: FetchDataApi.loadAddresss(),
       builder: (context, AsyncSnapshot<List<Employee>> snapshot) {
@@ -93,26 +143,13 @@ class _TeacherPhoneScreenState extends State<TeacherPhoneScreen> {
         if (!snapshot.hasData) {
           return const Center(child: CircularProgressIndicator());
         }
-        return Padding(
-          padding: const EdgeInsets.only(top: 140.0),
-          child: dashboardBody(context, employeeData),
+        return Container(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: _dashboardBody(context, employeeData),
+          ),
         );
       },
-    );
-  }
-
-  Widget searchWidget(BuildContext context) {
-    return Material(
-      elevation: 3,
-      borderRadius: BorderRadius.circular(16),
-      child: SearchWidget(
-        onChange: searchItems,
-        text: query,
-        isFocus: false,
-        controller: _searchController,
-        focusNode: _searchFocusNode,
-        onChanged: null,
-      ),
     );
   }
 
@@ -128,21 +165,24 @@ class _TeacherPhoneScreenState extends State<TeacherPhoneScreen> {
     });
   }
 
-  Widget dashboardBody(BuildContext context, List<Employee> employeeData) {
+  Widget _dashboardBody(BuildContext context, List<Employee> employeeData) {
     return Scrollbar(
       thumbVisibility: true,
-      thickness: 6,
+      thickness: 8,
       radius: const Radius.circular(10),
+      controller: _scrollController, // Provide ScrollController
       child: ListView.builder(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        controller: _scrollController, // Provide ScrollController
+        shrinkWrap: true, // Ensures that the ListView is as small as its children
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
         itemCount: employeeData.length,
-        itemBuilder: (c, i) {
+        itemBuilder: (context, index) {
           employeeData.sort((a, b) => a.name!.compareTo(b.name!));
           return EmployeeListWidget(
-            name: employeeData[i].name,
-            phoneNo: employeeData[i].phone,
-            email: employeeData[i].email,
-            designation: employeeData[i].designation,
+            name: employeeData[index].name,
+            phoneNo: employeeData[index].phone,
+            email: employeeData[index].email,
+            designation: employeeData[index].designation,
           );
         },
       ),

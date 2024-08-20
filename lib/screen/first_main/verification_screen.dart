@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_school_app/login.dart';
-import 'package:flutter_school_app/signup_pass.dart';
+import 'package:flutter_school_app/screen/first_main/login.dart';
+import 'package:flutter_school_app/screen/first_main/signup_pass.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class VerificationScreen extends StatelessWidget {

@@ -8,13 +8,13 @@ class SearchWidget extends StatefulWidget {
   final FocusNode? focusNode;
 
   const SearchWidget({
-    Key? key,
+    super.key,
     this.controller,
     required this.text,
     this.isFocus = false,
     this.focusNode,
-    required this.onChange, required onChanged,
-  }) : super(key: key);
+    required this.onChange,
+  });
 
   @override
   _SearchWidgetState createState() => _SearchWidgetState();
@@ -26,7 +26,6 @@ class _SearchWidgetState extends State<SearchWidget> {
   @override
   void initState() {
     super.initState();
-    // Add listener to the text controller to update the search state
     widget.controller?.addListener(() {
       setState(() {
         _isSearching = widget.controller?.text.isNotEmpty ?? false;
@@ -36,44 +35,57 @@ class _SearchWidgetState extends State<SearchWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      cursorColor: Theme.of(context).primaryColor,
-      controller: widget.controller,
-      focusNode: widget.focusNode,
-      autofocus: widget.isFocus,
-      decoration: InputDecoration(
-        hintText: "Search",
-        hintStyle: TextStyle(
-          color: Colors.grey.shade600,
-        ),
-        prefixIcon: const Icon(Icons.search),
-        suffixIcon: _isSearching
-            ? IconButton(
-                icon: const Icon(Icons.close),
-                onPressed: () {
-                  widget.controller!.clear();
-                  widget.onChange('');
-                  setState(() {
-                    _isSearching = false;
-                  });
-                  FocusScope.of(context).unfocus();
-                },
-              )
-            : null,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20.0),
-          borderSide: BorderSide.none,
-        ),
-        filled: true,
-        fillColor: Colors.grey.shade200,
-        contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 300),
+      padding: const EdgeInsets.symmetric(horizontal: 8),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(30),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            spreadRadius: 2,
+            blurRadius: 6,
+            offset: const Offset(0, 2), // changes position of shadow
+          ),
+        ],
       ),
-      onChanged: (text) {
-        widget.onChange(text);
-        setState(() {
-          _isSearching = text.isNotEmpty;
-        });
-      },
+      child: TextField(
+        cursorColor: Theme.of(context).primaryColor,
+        controller: widget.controller,
+        focusNode: widget.focusNode,
+        autofocus: widget.isFocus,
+        decoration: InputDecoration(
+          hintText: "Search...",
+          hintStyle: TextStyle(
+            color: Colors.grey.shade600,
+            fontSize: 16,
+          ),
+          prefixIcon: const Icon(Icons.search, color: Colors.grey),
+          suffixIcon: _isSearching
+              ? IconButton(
+                  icon: const Icon(Icons.clear),
+                  color: Colors.grey,
+                  onPressed: () {
+                    widget.controller?.clear();
+                    widget.onChange('');
+                    setState(() {
+                      _isSearching = false;
+                    });
+                    FocusScope.of(context).unfocus();
+                  },
+                )
+              : null,
+          border: InputBorder.none,
+          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        ),
+        onChanged: (text) {
+          widget.onChange(text);
+          setState(() {
+            _isSearching = text.isNotEmpty;
+          });
+        },
+      ),
     );
   }
 }

@@ -1,14 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../login.dart';
-import '../model.dart';
+import '../first_main/login.dart';
+import '../../data/model/model.dart';
 import '../students/posts.dart';
 import '../students/StudentList.dart';
 
 class Teacher extends StatefulWidget {
   final String id;
-  const Teacher({Key? key, required this.id}) : super(key: key);
+  const Teacher({super.key, required this.id});
 
   @override
   _TeacherState createState() => _TeacherState();

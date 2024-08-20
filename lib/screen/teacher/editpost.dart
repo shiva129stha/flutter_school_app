@@ -1,11 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_school_app/students/formatdate.dart';
+import 'package:flutter_school_app/screen/students/formatdate.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class EditPost extends StatefulWidget {
   final DocumentSnapshot docid;
 
-  const EditPost({Key? key, required this.docid}) : super(key: key);
+  const EditPost({super.key, required this.docid});
 
   @override
   _EditPostState createState() => _EditPostState();
@@ -16,21 +17,31 @@ class _EditPostState extends State<EditPost> {
   String createdAtText = 'No date available';
   String updatedAtText = 'No date available';
 
+  final User? currentUser = FirebaseAuth.instance.currentUser;
+
   @override
   void initState() {
     super.initState();
     _titleController = TextEditingController(text: widget.docid['title'] ?? '');
 
-    // Format and set the createdAt date
     final createdAt = widget.docid['createdAt'];
     if (createdAt is Timestamp) {
       createdAtText = 'Created on: ${formatDate(createdAt)}';
     }
 
-    // Format and set the updatedAt date
     final updatedAt = widget.docid['updatedAt'];
     if (updatedAt is Timestamp) {
       updatedAtText = 'Last updated on: ${formatDate(updatedAt)}';
+    }
+
+    // Check if the current user is the creator of the post
+    if (widget.docid['createdBy'] != currentUser?.uid) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('You can only edit your own posts'),
+        ),
+      );
+      Navigator.pop(context);
     }
   }
 
@@ -50,10 +61,9 @@ class _EditPostState extends State<EditPost> {
             .doc(widget.docid.id)
             .update({
               'title': title,
-              'updatedAt': FieldValue.serverTimestamp(), // Update timestamp on modification
+              'updatedAt': FieldValue.serverTimestamp(),
             });
 
-        // Fetch the updated document to get the new 'updatedAt' timestamp
         DocumentSnapshot updatedDoc = await FirebaseFirestore.instance
             .collection('posts')
             .doc(widget.docid.id)
@@ -77,6 +87,34 @@ class _EditPostState extends State<EditPost> {
         );
       }
     }
+  }
+
+  Future<void> _confirmDeletePost() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // User must tap button to close
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Delete Post'),
+          content: const Text('Are you sure you want to delete this post? This action cannot be undone.'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop(); // Dismiss the dialog
+              },
+            ),
+            TextButton(
+              child: const Text('Yes, Delete'),
+              onPressed: () {
+                Navigator.of(context).pop(); // Dismiss the dialog
+                _deletePost(); // Proceed with delete action
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   Future<void> _deletePost() async {
@@ -134,9 +172,9 @@ class _EditPostState extends State<EditPost> {
                   child: const Text('Update Post'),
                 ),
                 ElevatedButton(
-                  onPressed: _deletePost,
+                  onPressed: _confirmDeletePost,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.red, // Red color for delete button
+                    backgroundColor: Colors.red,
                   ),
                   child: const Text('Delete Post'),
                 ),

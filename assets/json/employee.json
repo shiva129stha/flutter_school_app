@@ -8,240 +8,275 @@
   },
   {
     "id": "2",
+    "name": "Amuda Maharjan",
+    "phone": "9841966161",
+    "email": "amudamaharjan1@gmail.com",
+    "designation": "Teacher"
+  },
+  {
+    "id": "3",
     "name": "Anish Maharjan",
     "phone": "9851300541",
     "email": "anic1180official@gmail.com",
     "designation": "Teacher"
   },
   {
-    "id": "3",
+    "id": "4",
     "name": "Anita Shahi",
     "phone": "9841022225",
     "email": "shahianita177@gmail.com",
     "designation": "Teacher"
   },
   {
-    "id": "4",
+    "id": "5",
+    "name": "Archana Shrestha",
+    "phone": "9841285552",
+    "email": "archanashr@gmail.com",
+    "designation": "Teacher"
+  },
+  {
+    "id": "6",
     "name": "Bishnu Maya Mishra",
     "phone": "9841384022",
     "email": "bimalapandey165@gmail.com",
     "designation": "Teacher"
   },
   {
-    "id": "5",
+    "id": "7",
+    "name": "Ganga Shrestha",
+    "phone": "9860469124",
+    "email": "shrestha99ganga@gmail.com",
+    "designation": "Staff"
+  },
+  {
+    "id": "8",
+    "name": "Gany Shrestha",
+    "phone": "9811755179",
+    "email": "",
+    "designation": "Staff"
+  },
+  {
+    "id": "9",
+    "name": "Gobinda Pathak",
+    "phone": "984312735",
+    "email": "pathakgovinda32@gmail.com",
+    "designation": "Staff"
+  },
+  {
+    "id": "10",
     "name": "Hira Sina Maharjan",
     "phone": "9841427681",
     "email": "maharjanbinod66@gmail.com",
     "designation": "Teacher"
   },
   {
-    "id": "6",
+    "id": "11",
     "name": "Hirakaji Maharjan",
     "phone": "9860300600",
     "email": "kajiheera@gmail.com",
     "designation": "Accountant"
   },
   {
-    "id": "7",
+    "id": "12",
     "name": "Ishara Dhakal",
     "phone": "9860831508",
     "email": "dhakalishara15@gmail.com",
     "designation": "Teacher"
   },
  {
-    "id": "8",
+    "id": "13",
     "name": "Kabitri Singh",
     "phone": "9818448675",
     "email": "kabitri singh@gmail.com",
     "designation": "Teacher"
   },
   {
-    "id": "9",
+    "id": "14",
     "name": "Kalpana Koirala",
     "phone": "9842100617",
     "email": "kkoirala854@gmail.com",
     "designation": "Teacher"
   },
   {
-    "id": "10",
+    "id": "15",
+    "name": "Krishna Laxmi Maharjan",
+    "phone": "9841620449",
+    "email": "maharjanlaxmi122@gmail.com",
+    "designation": "Staff"
+  },
+  {
+    "id": "16",
     "name": "Machakaji Maharjan",
     "phone": "9841340445",
     "email": "macha.newa@gmail.com",
-    "designation": "Teacher"
+    "designation": "Incharge"
   },
   {
-    "id": "11",
+    "id": "17",
     "name": "Madhabi Sapkota",
     "phone": "9845205974",
     "email": "madhabi144@gmail.com",
     "designation": "Teacher"
   },
   {
-    "id": "12",
+    "id": "18",
     "name": "Mallika Joshi Shrestha",
     "phone": "9803840388",
     "email": "mallika.js7777@gmail.com",
     "designation": "Teacher"
   },
   {
-    "id": "13",
+    "id": "19",
     "name": "Mani Raj Manandhar",
     "phone": "9841889928",
     "email": "mrsayami89@gmail.com",
     "designation": "Teacher"
   },
   {
-    "id": "14",
-    "name": "Meenu Gurung",
-    "phone": "9861490136",
-    "email": "menuugurungg2019@gmail.com",
-    "designation": "Teacher"
-  },
-  {
-    "id": "15",
+    "id": "20",
     "name": "Pooja Dangol",
     "phone": "9841760903",
     "email": "puju.dongal@gmail.com",
-    "designation": "Teacher"
+    "designation": "Incharge"
   },
   {
-    "id": "16",
+    "id": "21",
     "name": "Rabina Maharjan",
     "phone": "9841455244",
     "email": "rabina.cm@gmail.com",
     "designation": "Principal"
   },
   {
-    "id": "17",
-    "name": "Rajat Upreti",
-    "phone": "9860688864",
-    "email": "rajatupreti5@gmail.com",
-    "designation": "Teacher"
-  },
-  {
-    "id": "18",
+    "id": "22",
     "name": "Rashmi Maharjan",
     "phone": "9841079972",
     "email": "mrashmi715@gmail.com",
     "designation": "Teacher"
   },
   {
-    "id": "19",
-    "name": "Rema Manandhar",
-    "phone": "9841145537",
-    "email": "manandharrema@gmail.com",
-    "designation": "Teacher"
+    "id": "23",
+    "name": "Rawol Maharjan",
+    "phone": "9843144266",
+    "email": "rawolmaharjan@gmail.com",
+    "designation": "Computer Teacher"
   },
   {
-    "id": "20",
+    "id": "24",
     "name": "Reja Thapa",
     "phone": "9861484186",
     "email": "rejathapa51@gmail.com",
     "designation": "Teacher"
   },
   {
-    "id": "21",
-    "name": "Rita Lama",
-    "phone": "9849934314",
-    "email": "reetalama026@gmail.com",
+    "id": "25",
+    "name": "Rema Manandhar",
+    "phone": "9841145537",
+    "email": "manandharrema@gmail.com",
     "designation": "Teacher"
   },
   {
-    "id": "22",
+    "id": "26",
+    "name": "Rita Lama",
+    "phone": "9849934314",
+    "email": "reetalama026@gmail.com",
+    "designation": "Incharge"
+  },
+  {
+    "id": "27",
     "name": "Roshana Shakya",
     "phone": "9849516595",
     "email": "roshana3115@gmail.com",
     "designation": "Teacher"
   },
   {
-    "id": "23",
+    "id": "28",
+    "name": "Sampurna Shkya",
+    "phone": "",
+    "email": "",
+    "designation": "Computer Teacher"
+  },
+  {
+    "id": "29",
     "name": "Samjhana Baskota",
     "phone": "9841680280",
     "email": "samjhanakhatri280@gmail.com",
     "designation": "Teacher"
   },
   {
-    "id": "24",
+    "id": "30",
     "name": "Santa Kumari Tripathi",
     "phone": "9841910818",
     "email": "shanta.kt123@gmail.com",
     "designation": "Teacher"
   },
   {
-    "id": "25",
+    "id": "31",
     "name": "Santoshi Thokar",
     "phone": "9841721988",
     "email": "thokaraantoshi988@gmail.com",
     "designation": "Teacher"
   },
   {
-    "id": "26",
+    "id": "32",
     "name": "Saraswati Shrestha",
     "phone": "9849570974",
     "email": "saraswatishrestha222@gmail.com",
     "designation": "Teacher"
   },
   {
-    "id": "27",
+    "id": "33",
     "name": "Shaily Shakya",
     "phone": "9851133533",
     "email": "shailyshakya2020@gmail.com",
-    "designation": "Teacher"
+    "designation": "Incharge"
   },
   {
-    "id": "28",
+    "id": "34",
     "name": "Shyam Prasad Chapagain",
     "phone": "9841402829",
     "email": "shyam.chaoagain51@gmail.com",
     "designation": "Teacher"
   },
   {
-    "id": "29",
+    "id": "35",
     "name": "Sujita Singh",
     "phone": "9813475933",
     "email": "sujitasingh5000@gmail.com",
     "designation": "Teacher"
   },
   {
-    "id": "30",
+    "id": "36",
     "name": "Sumitra Baskota",
     "phone": "9841743329",
     "email": "sumitrabaskota55@gmail.com",
     "designation": "Teacher"
   },
   {
-    "id": "31",
+    "id": "37",
     "name": "Suraj Dangol",
     "phone": "9851159122",
     "email": "surajdongol1229@gmail.com",
     "designation": "Teacher"
   },
   {
-    "id": "32",
+    "id": "38",
     "name": "Susan Adhikari",
     "phone": "9867149072",
     "email": "susanadhikari001@gmail.com",
     "designation": "Teacher"
   },
   {
-    "id": "33",
+    "id": "39",
     "name": "Sushila Maharjan",
     "phone": "9841237146",
     "email": "sulax2371@gmail.com",
     "designation": "Teacher"
   },
   {
-    "id": "34",
+    "id": "40",
     "name": "Sushmita Shrestha",
     "phone": "9861834691",
     "email": "sushmistha122@gmail.com",
-    "designation": "Teacher"
-  },
-  {
-    "id": "35",
-    "name": "Uma Thapa",
-    "phone": "9841686221",
-    "email": "umat68422@gmail.com",
     "designation": "Teacher"
   }
 ]

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_school_app/students/registerstu.dart';
-import 'package:flutter_school_app/teacher/registertec.dart';
-
+import 'package:flutter_school_app/screen/students/registerstu.dart';
+import 'package:flutter_school_app/screen/teacher/registertec.dart';
 
 class StudentLoginPage extends StatefulWidget {
   const StudentLoginPage({super.key});
@@ -15,7 +14,8 @@ class _StudentLoginPageState extends State<StudentLoginPage> {
   bool _isObscure = true;
 
   void _login() {
-    if (_passwordController.text == "student123") { // Replace with your student password
+    if (_passwordController.text == "student123") {
+      // Replace with your student password
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => const StudentDashboard()),
@@ -34,7 +34,8 @@ class _StudentLoginPageState extends State<StudentLoginPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text('Student Login', style: TextStyle(color: Colors.white)),
+        title:
+            const Text('Student Login', style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.orange[800],
       ),
       body: Padding(
@@ -77,7 +78,8 @@ class _StudentLoginPageState extends State<StudentLoginPage> {
                   borderRadius: BorderRadius.circular(30.0),
                   borderSide: BorderSide.none,
                 ),
-                contentPadding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
+                contentPadding: const EdgeInsets.symmetric(
+                    horizontal: 20.0, vertical: 15.0),
                 hintStyle: TextStyle(color: Colors.grey[600]),
               ),
             ),
@@ -86,9 +88,10 @@ class _StudentLoginPageState extends State<StudentLoginPage> {
               onPressed: _login,
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.orange[800],
-                padding: const EdgeInsets.symmetric(vertical: 14.0),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 100, vertical: 15),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.0),
+                  borderRadius: BorderRadius.circular(30),
                 ),
               ),
               child: const Text(
@@ -115,7 +118,8 @@ class _TeacherLoginPageState extends State<TeacherLoginPage> {
   bool _isObscure = true;
 
   void _login() {
-    if (_passwordController.text == "teacher123") { // Replace with your teacher password
+    if (_passwordController.text == "teacher123") {
+      // Replace with your teacher password
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => const TeacherDashboard()),
@@ -134,7 +138,8 @@ class _TeacherLoginPageState extends State<TeacherLoginPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text('Teacher Login', style: TextStyle(color: Colors.white)),
+        title:
+            const Text('Teacher Login', style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.orange[800],
       ),
       body: Padding(
@@ -177,7 +182,8 @@ class _TeacherLoginPageState extends State<TeacherLoginPage> {
                   borderRadius: BorderRadius.circular(30.0),
                   borderSide: BorderSide.none,
                 ),
-                contentPadding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
+                contentPadding: const EdgeInsets.symmetric(
+                    horizontal: 20.0, vertical: 15.0),
                 hintStyle: TextStyle(color: Colors.grey[600]),
               ),
             ),
@@ -186,9 +192,10 @@ class _TeacherLoginPageState extends State<TeacherLoginPage> {
               onPressed: _login,
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.orange[800],
-                padding: const EdgeInsets.symmetric(vertical: 14.0),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 100, vertical: 15),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.0),
+                  borderRadius: BorderRadius.circular(30),
                 ),
               ),
               child: const Text(

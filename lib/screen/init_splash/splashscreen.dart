@@ -1,13 +1,12 @@
+// ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:flutter_school_app/home.dart';
-import 'package:flutter_school_app/login.dart';
+import 'package:flutter_school_app/screen/first_main/home.dart';
+import 'package:flutter_school_app/screen/first_main/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
-  final SharedPreferences? prefs;
-
-  const SplashScreen({super.key, this.prefs});
+  const SplashScreen({super.key, SharedPreferences? prefs});
 
   @override
   _SplashScreenState createState() => _SplashScreenState();
@@ -24,15 +23,16 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> _checkLoginStatus() async {
     try {
-      if (widget.prefs == null) {
-        throw Exception('SharedPreferences instance is null');
-      }
-
-      final bool isLoggedIn = widget.prefs?.getBool("isLoggedIn") ?? false;
+      // Get SharedPreferences instance
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      
+      // Retrieve login status
+      final bool isLoggedIn = prefs.getBool("isLoggedIn") ?? false;
 
       // Simulate a delay for splash screen effect
-      await Future.delayed(const Duration(milliseconds: 300));
+      await Future.delayed(const Duration(seconds: 1));
 
+      // Navigate based on login status
       if (isLoggedIn) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (context) => const HomePageController()),
@@ -44,6 +44,7 @@ class _SplashScreenState extends State<SplashScreen> {
       }
     } catch (e) {
       print('Error checking login status: $e');
+      // Navigate to login page in case of error
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => const LoginPageScreen()),
       );

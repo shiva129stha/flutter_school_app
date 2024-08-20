@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_school_app/screen/dashboard_screen_stu.dart';
 import 'package:flutter_school_app/screen/dashboard_screen_teacher.dart';
 
-import 'model.dart';
-import 'students/student.dart';
-import 'teacher/teacher.dart';
+import '../../../../data/model/model.dart';
 
 class HomePageController extends StatefulWidget {
   const HomePageController({super.key});

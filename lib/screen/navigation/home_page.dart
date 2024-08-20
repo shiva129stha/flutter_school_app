@@ -254,7 +254,29 @@ void showMyForm(int? id) async {
   }
 
   //Delete data
-  void deleteItem(int id) async {
+ void deleteItem(int id) async {
+  final bool? shouldDelete = await showDialog<bool>(
+    context: context,
+    barrierDismissible: false, // Prevents dismissing the dialog by tapping outside
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('Confirm Deletion'),
+        content: const Text('Are you sure you want to delete this item?'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false), // User pressed "Cancel"
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(true), // User pressed "Yes"
+            child: const Text('Yes'),
+          ),
+        ],
+      );
+    },
+  );
+
+  if (shouldDelete == true) {
     try {
       await DatabaseHelper.deleteItem(id);
       ScaffoldMessenger.of(context).showSnackBar(
@@ -268,4 +290,5 @@ void showMyForm(int? id) async {
       print('Error deleting item: $e');
     }
   }
+}
 }

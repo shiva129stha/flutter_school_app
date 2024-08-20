@@ -49,7 +49,7 @@ class _SchoolDashboardScreenState extends State<SchoolDashboardScreen> {
                                 Text(
                                   "Saraswati Niketan Secondary School",
                                   style: TextStyle(
-                                    //fontSize: 15,
+                                    fontSize: 16,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white,
                                   ),
@@ -61,7 +61,7 @@ class _SchoolDashboardScreenState extends State<SchoolDashboardScreen> {
                                   "Brahma Tole, Teku, Kathmandu",
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    //fontSize: 19,
+                                    fontSize: 15,
                                     color: Colors.white,
                                   ),
                                 ),
@@ -72,7 +72,7 @@ class _SchoolDashboardScreenState extends State<SchoolDashboardScreen> {
                                   "Tel: 01-5355489",
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    //fontSize: 19,
+                                    fontSize: 15,
                                     color: Colors.white,
                                   ),
                                 ),
@@ -84,7 +84,7 @@ class _SchoolDashboardScreenState extends State<SchoolDashboardScreen> {
                                 bottom: 20.0, right: 15.0),
                             child: SizedBox(
                                 height: 100,
-                                width: screenWidth * 0.30,
+                                width: screenWidth * 0.25,
                                 child: Image.asset("assets/images/image1.png")),
                             // CircleAvatar(
                             //     maxRadius: 30,
@@ -109,37 +109,68 @@ class _SchoolDashboardScreenState extends State<SchoolDashboardScreen> {
                         height: 20,
                       ),
                       Container(
-                        height: 60,
-                        width: double.maxFinite,
-                        decoration: BoxDecoration(
-                          //color: Colors.white,
-                          borderRadius: BorderRadius.circular(0),
-                          boxShadow: const [
-                            BoxShadow(
-                              //color: Color(0xFFe8e8e8),
-                              blurRadius: 10,
-                              offset: Offset(0, 10),
-                            ),
-                          ],
-                        ),
-                        child: ElevatedButton(
-                          style: ButtonStyle(
-                            backgroundColor: WidgetStateProperty.all<Color>(
-                                Colors.white), // Change color here
+                          height: 60,
+                          width: double.maxFinite,
+                          decoration: BoxDecoration(
+                            //color: Colors.white,
+                            borderRadius: BorderRadius.circular(0),
+                            boxShadow: const [
+                              BoxShadow(
+                                //color: Color(0xFFe8e8e8),
+                                blurRadius: 10,
+                                offset: Offset(0, 10),
+                              ),
+                            ],
                           ),
-                          onPressed: () {
-                            Navigator.push(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              foregroundColor: Colors.white,
+                              backgroundColor:
+                                  Colors.orange, // Background color
+                              elevation: 5, // Shadow depth
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(
+                                    12), // Rounded corners
+                              ),
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 16,
+                                  horizontal: 24), // Padding inside the button
+                              textStyle: const TextStyle(
+                                fontSize: 20, // Font size
+                                fontWeight: FontWeight.bold, // Font weight
+                              ),
+                            ),
+                            onPressed: () {
+                              Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => const AboutSchool(),
-                                ));
-                          },
-                          child: const Text(
-                            "About School",
-                            style: TextStyle(color: Colors.black, fontSize: 20),
-                          ),
-                        ),
-                      ),
+                                ),
+                              );
+                            },
+                            child: const Row(
+                              mainAxisSize: MainAxisSize
+                                  .min, // Ensure the button only takes up as much space as needed
+                              mainAxisAlignment: MainAxisAlignment
+                                  .center, // Center the contents horizontally
+                              children: [
+                                Icon(
+                                  Icons.school, // School icon
+                                  color: Colors.white,
+                                  size: 24, // Icon size
+                                ),
+                                SizedBox(
+                                    width: 8), // Space between icon and text
+                                Text(
+                                  "About School",
+                                  style: TextStyle(
+                                    fontSize: 20, // Larger text size
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )),
                       const SizedBox(
                         height: 20,
                       ),
@@ -191,7 +222,7 @@ class _SchoolDashboardScreenState extends State<SchoolDashboardScreen> {
                                               ));
                                         },
                                         child: const Text(
-                                          "Number of Students",
+                                          "Class",
                                           style: TextStyle(
                                               fontSize: 18,
                                               color: Colors.white),

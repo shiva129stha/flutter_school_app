@@ -1,19 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_school_app/login.dart';
+import 'package:flutter_school_app/screen/first_main/login.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../model.dart';
+import '../../data/model/model.dart';
 
-class StudentDashboard extends StatefulWidget {
-  const StudentDashboard({super.key});
+class TeacherDashboard extends StatefulWidget {
+  const TeacherDashboard({super.key});
 
   @override
   _TeacherDashboardState createState() => _TeacherDashboardState();
 }
 
-class _TeacherDashboardState extends State<StudentDashboard> {
+class _TeacherDashboardState extends State<TeacherDashboard> {
   bool isLoading = false;
   final _formKey = GlobalKey<FormState>();
   final _auth = FirebaseAuth.instance;
@@ -25,9 +26,9 @@ class _TeacherDashboardState extends State<StudentDashboard> {
   bool _isObscure2 = true;
   final List<String> genderOptions = ['Male', 'Female', 'Other'];
   String _currentGenderSelected = "Male";
-  String role = "Student";
-  final List<String> roleOptions = ['Student'];
-  String _currentRoleSelected = "Student";
+  String role = "Teacher";
+  final List<String> roleOptions = ['Teacher'];
+  String _currentRoleSelected = "Teacher";
 
   @override
   void dispose() {
@@ -316,15 +317,36 @@ class _TeacherDashboardState extends State<StudentDashboard> {
                                 ),
                               ),
                             ),
-                            child: const Center(child: Text("Register")),
+                            child: const Center(child: Text("Register",style: TextStyle(color: Colors.black),)),
                           ),
                   ],
                 ),
               ),
               const SizedBox(height: 20),
               Center(
-                child: TextButton(
-                  onPressed: () {
+                child: RichText(
+          text: TextSpan(
+            children: [
+              TextSpan(
+                text: "Already have an account? ",
+                style: GoogleFonts.poppins(
+                  textStyle: TextStyle(
+                    color: Colors.grey[700], // Color for non-clickable text
+                    fontSize: 14,
+                  ),
+                ),
+              ),
+              TextSpan(
+                text: "Login",
+                style: GoogleFonts.poppins(
+                  textStyle: TextStyle(
+                    color: Colors.orange[800], // Color for clickable text
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold, // Optional for emphasis
+                  ),
+                ),
+                recognizer: TapGestureRecognizer()
+                  ..onTap = () {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
@@ -332,16 +354,10 @@ class _TeacherDashboardState extends State<StudentDashboard> {
                       ),
                     );
                   },
-                  child: Text(
-                    "Already have an account? Login",
-                    style: GoogleFonts.poppins(
-                      textStyle: TextStyle(
-                        color: Colors.orange[800],
-                        fontSize: 14,
-                      ),
-                    ),
-                  ),
-                ),
+              ),
+            ],
+          ),
+        ),
               ),
             ],
           ),

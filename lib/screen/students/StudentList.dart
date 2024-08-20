@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -26,8 +28,9 @@ class StudentListState extends State<StudentList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Text('Students'),
-        backgroundColor: Colors.orange, // Consistent theme color
+        backgroundColor: Colors.tealAccent, // Consistent theme color
       ),
       body: StreamBuilder(
         stream: _usersStream,
