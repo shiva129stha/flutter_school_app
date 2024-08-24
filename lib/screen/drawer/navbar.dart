@@ -3,6 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_school_app/screen/drawer/calendar_page.dart';
 import 'package:flutter_school_app/screen/first_main/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -21,22 +22,38 @@ class _NavBarState extends State<NavBar> {
     super.initState();
     User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
-      _userStream = FirebaseFirestore.instance.collection('users').doc(user.uid).snapshots();
+      _userStream = FirebaseFirestore.instance
+          .collection('users')
+          .doc(user.uid)
+          .snapshots();
     }
   }
 
   Color _generateBackgroundColor(String name) {
     final colors = [
       Colors.redAccent,
-      Colors.deepPurpleAccent,
+      Colors.black,
       Colors.greenAccent,
       Colors.blueAccent,
       Colors.pinkAccent,
-      Colors.orangeAccent,
+      Colors.purpleAccent,
       Colors.tealAccent,
     ];
     final index = name.isNotEmpty ? name.codeUnitAt(0) % colors.length : 0;
     return colors[index];
+  }
+
+  // Extract initials from the user's name
+  String getInitials(String name) {
+    List<String> nameParts = name.split(" ");
+    String initials = "";
+    if (nameParts.isNotEmpty) {
+      initials = nameParts[0][0].toUpperCase(); // First name initial
+      if (nameParts.length > 1) {
+        initials += nameParts[1][0].toUpperCase(); // Last name initial
+      }
+    }
+    return initials;
   }
 
   @override
@@ -47,7 +64,8 @@ class _NavBarState extends State<NavBar> {
         if (snapshot.hasError) {
           return Drawer(
             child: Center(
-              child: Text('Error: ${snapshot.error}', style: const TextStyle(color: Colors.red)),
+              child: Text('Error: ${snapshot.error}',
+                  style: const TextStyle(color: Colors.red)),
             ),
           );
         }
@@ -63,7 +81,8 @@ class _NavBarState extends State<NavBar> {
         if (!snapshot.hasData || !snapshot.data!.exists) {
           return const Drawer(
             child: Center(
-              child: Text('User not found', style: TextStyle(color: Colors.red)),
+              child:
+                  Text('User not found', style: TextStyle(color: Colors.red)),
             ),
           );
         }
@@ -71,7 +90,7 @@ class _NavBarState extends State<NavBar> {
         var userData = snapshot.data!;
         String name = userData['name'] ?? 'No Name';
         String email = userData['email'] ?? 'No Email';
-        String initial = name.isNotEmpty ? name[0].toUpperCase() : "?";
+        String initials = getInitials(name);
         Color backgroundColor = _generateBackgroundColor(name);
 
         return Drawer(
@@ -106,7 +125,7 @@ class _NavBarState extends State<NavBar> {
                     radius: 45,
                     backgroundColor: backgroundColor,
                     child: Text(
-                      initial,
+                      initials,
                       style: const TextStyle(
                         fontSize: 32,
                         fontWeight: FontWeight.bold,
@@ -133,6 +152,18 @@ class _NavBarState extends State<NavBar> {
                     // Handle navigation
                   },
                   color: Colors.cyanAccent,
+                ),
+                _createDrawerItem(
+                  icon: Icons.calendar_today,
+                  text: 'Calendar',
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => NepaliCalendarPage(),
+                      ),
+                    );
+                  },
+                  color: Colors.orangeAccent,
                 ),
                 _createDrawerItem(
                   icon: Icons.settings,
@@ -171,19 +202,19 @@ class _NavBarState extends State<NavBar> {
   }) {
     return ListTile(
       leading: Icon(icon, color: color),
-      title: Text(text, style: const TextStyle(color: Colors.white, fontSize: 16)),
+      title:
+          Text(text, style: const TextStyle(color: Colors.white, fontSize: 16)),
       onTap: onTap,
     );
   }
+
   Future<void> _logout(BuildContext context) async {
-  final SharedPreferences prefs = await SharedPreferences.getInstance();
-  await prefs.setBool("isLoggedIn", false);
-   Navigator.of(context).pushReplacement(
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool("isLoggedIn", false);
+    Navigator.of(context).pushReplacement(
       MaterialPageRoute(
         builder: (context) => const LoginPageScreen(),
       ),
     );
-}
-
-
+  }
 }

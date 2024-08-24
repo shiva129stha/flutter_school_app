@@ -6,7 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 class EditPost extends StatefulWidget {
   final DocumentSnapshot docid;
 
-  const EditPost({super.key, required this.docid});
+  const EditPost({super.key, required this.docid,});
 
   @override
   _EditPostState createState() => _EditPostState();

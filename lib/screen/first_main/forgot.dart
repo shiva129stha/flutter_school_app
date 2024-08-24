@@ -221,7 +221,7 @@ class _ForgotpassState extends State<Forgotpass> {
                               ),
                             ),
                           ),
-                          child: Center(child: Text(_isChangingPassword ? "Change Password" : "Reset Password")),
+                          child: Center(child: Text(_isChangingPassword ? "Change Password" : "Reset Password",style: TextStyle(color: Colors.black),)),
                         ),
                         const SizedBox(height: 20),
                         Row(
@@ -236,12 +236,15 @@ class _ForgotpassState extends State<Forgotpass> {
                                   ),
                                 );
                               },
-                              child: Text(
-                                "Back to Login",
-                                style: GoogleFonts.poppins(
-                                  textStyle: TextStyle(
-                                    color: Colors.orange[800],
-                                    fontSize: 14,
+                              child: RichText(
+                                text: TextSpan(
+                text: "Back to Login",
+                style: GoogleFonts.poppins(
+                  textStyle: TextStyle(
+                    color: Colors.orange[800], // Color for clickable text
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold, // Optional for emphasis
+                  ),
                                   ),
                                 ),
                               ),

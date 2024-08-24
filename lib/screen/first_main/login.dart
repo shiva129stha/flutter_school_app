@@ -176,7 +176,7 @@ class _LoginPageState extends State<LoginPageScreen> {
                               ),
                             ),
                           ),
-                          child: const Center(child: Text("Login")),
+                          child: const Center(child: Text("Login",style: TextStyle(color: Colors.black),)),
                         ),
                         const SizedBox(height: 20),
                         Row(
@@ -191,12 +191,15 @@ class _LoginPageState extends State<LoginPageScreen> {
                                   ),
                                 );
                               },
-                              child: Text(
-                                "Forgot Password?",
-                                style: GoogleFonts.poppins(
-                                  textStyle: TextStyle(
-                                    color: Colors.orange[800],
-                                    fontSize: 14,
+                              child: RichText(
+                                text: TextSpan(
+                                  text: "Forgot Password?",
+                                  style: GoogleFonts.poppins(
+                                    textStyle: TextStyle(
+                                      color: Colors.orange[800],
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 14,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -217,12 +220,15 @@ class _LoginPageState extends State<LoginPageScreen> {
                                   ),
                                 );
                               },
-                              child: Text(
-                                "Sign Up",
-                                style: GoogleFonts.poppins(
-                                  textStyle: TextStyle(
-                                    color: Colors.orange[800],
-                                    fontSize: 14,
+                              child: RichText(
+                                text: TextSpan(
+                                  text: "Sign Up",
+                                  style: GoogleFonts.poppins(
+                                    textStyle: TextStyle(
+                                      color: Colors.orange[800],
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 14,
+                                    ),
                                   ),
                                 ),
                               ),

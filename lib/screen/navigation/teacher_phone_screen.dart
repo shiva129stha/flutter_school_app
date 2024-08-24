@@ -111,6 +111,7 @@ class _TeacherPhoneScreenState extends State<TeacherPhoneScreen> with SingleTick
             ),
         child: SafeArea(
           child: SingleChildScrollView(
+            // ignore: avoid_unnecessary_containers
             child: Container(
               child: Column(
                 
@@ -143,6 +144,7 @@ class _TeacherPhoneScreenState extends State<TeacherPhoneScreen> with SingleTick
         if (!snapshot.hasData) {
           return const Center(child: CircularProgressIndicator());
         }
+        // ignore: avoid_unnecessary_containers
         return Container(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),

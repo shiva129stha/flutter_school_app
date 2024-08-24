@@ -83,8 +83,8 @@ class _SchoolDashboardScreenState extends State<SchoolDashboardScreen> {
                             padding: const EdgeInsets.only(
                                 bottom: 20.0, right: 15.0),
                             child: SizedBox(
-                                height: 100,
-                                width: screenWidth * 0.25,
+                                height: 50,
+                                width: screenWidth * 0.2,
                                 child: Image.asset("assets/images/image1.png")),
                             // CircleAvatar(
                             //     maxRadius: 30,

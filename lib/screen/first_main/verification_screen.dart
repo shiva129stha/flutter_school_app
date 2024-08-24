@@ -45,25 +45,28 @@ class VerificationScreen extends StatelessWidget {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.orange[800],
-                  padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                  padding: const EdgeInsets.symmetric(vertical: 14.0),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
+                    borderRadius: BorderRadius.circular(30.0),
                   ),
-                ),
-                child: Text(
-                  'Student Login',
-                  style: GoogleFonts.poppins(
+                  textStyle: GoogleFonts.poppins(
                     textStyle: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
                     ),
+                  ),
+                ),
+                child: const Center(
+                  child: Text(
+                    'Student Login',
+                    style: TextStyle(color: Colors.black),
                   ),
                 ),
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const StudentLoginPage()),
+                    MaterialPageRoute(
+                        builder: (context) => const StudentLoginPage()),
                   );
                 },
               ),
@@ -71,25 +74,29 @@ class VerificationScreen extends StatelessWidget {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.orange[800],
-                  padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                  padding: const EdgeInsets.symmetric(vertical: 14.0),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
+                    borderRadius: BorderRadius.circular(30.0),
                   ),
-                ),
-                child: Text(
-                  'Teacher Login',
-                  style: GoogleFonts.poppins(
+                  textStyle: GoogleFonts.poppins(
                     textStyle: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
                     ),
                   ),
+                ),
+                child: const Center(
+                    child: Text(
+                  "Teacher Login",
+                  style: TextStyle(color: Colors.black,),
+                  
+                ),
                 ),
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const TeacherLoginPage()),
+                    MaterialPageRoute(
+                        builder: (context) => const TeacherLoginPage()),
                   );
                 },
               ),
@@ -103,12 +110,15 @@ class VerificationScreen extends StatelessWidget {
                     ),
                   );
                 },
-                child: Text(
-                  "Back to Login",
-                  style: GoogleFonts.poppins(
-                    textStyle: TextStyle(
-                      color: Colors.orange[800],
-                      fontSize: 14,
+                child: RichText(
+                  text: TextSpan(
+                    text: "Back to Login",
+                    style: GoogleFonts.poppins(
+                      textStyle: TextStyle(
+                        color: Colors.orange[800], // Color for clickable text
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold, // Optional for emphasis
+                      ),
                     ),
                   ),
                 ),

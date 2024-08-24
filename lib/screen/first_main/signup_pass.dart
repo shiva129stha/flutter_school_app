@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_school_app/screen/students/registerstu.dart';
 import 'package:flutter_school_app/screen/teacher/registertec.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class StudentLoginPage extends StatefulWidget {
   const StudentLoginPage({super.key});
@@ -87,13 +88,19 @@ class _StudentLoginPageState extends State<StudentLoginPage> {
             ElevatedButton(
               onPressed: _login,
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.orange[800],
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 100, vertical: 15),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
-                ),
-              ),
+                            backgroundColor: Colors.orange[800],
+                            padding:
+                                const EdgeInsets.symmetric(vertical: 14.0),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30.0),
+                            ),
+                            textStyle: GoogleFonts.poppins(
+                              textStyle: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
               child: const Text(
                 'Login',
                 style: TextStyle(fontSize: 18, color: Colors.white),
@@ -190,17 +197,25 @@ class _TeacherLoginPageState extends State<TeacherLoginPage> {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: _login,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.orange[800],
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 100, vertical: 15),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
+             style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.orange[800],
+                            padding:
+                                const EdgeInsets.symmetric(vertical: 14.0),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30.0),
+                            ),
+                            textStyle: GoogleFonts.poppins(
+                              textStyle: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+              child: const Center(
+                child:  Text(
+                  'Login',
+                  style: TextStyle(fontSize: 18, color: Colors.white),
                 ),
-              ),
-              child: const Text(
-                'Login',
-                style: TextStyle(fontSize: 18, color: Colors.white),
               ),
             ),
           ],
