@@ -1,35 +1,51 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_school_app/firebase_options.dart';
-import 'package:flutter_school_app/screen/init_state.dart';
-
-void main() async{
+import 'package:flutter_school_app/data/utils/firebase_options.dart';
+import 'package:flutter_school_app/screen/init_splash/splashscreen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+  // Handle background message
+}
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-);
-  runApp(const MyApp());
+
+  try {
+    await Firebase.initializeApp(
+       options: DefaultFirebaseOptions.currentPlatform,
+    ); 
+    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+    // Initialize Firebase
+  } catch (e) {
+    print('Error initializing Firebase: $e');
+  }
+
+  SharedPreferences? prefs;
+  try {
+    prefs = await SharedPreferences.getInstance();
+  } catch (e) {
+    print('Error initializing SharedPreferences: $e');
+  }
+
+  runApp(MyApp(prefs: prefs));
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+class MyApp extends StatelessWidget {
+  final SharedPreferences? prefs;
 
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
+  const MyApp({super.key, this.prefs});
 
-class _MyAppState extends State<MyApp> {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
+      title: 'School App',
       theme: ThemeData(
-        primarySwatch: Colors.blue
+        primarySwatch: Colors.orange,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: const InitState(),
+      home: SplashScreen(prefs: prefs),
     );
   }
 }
-
